@@ -8,7 +8,7 @@ import { generateContent } from './scripts/generate-content.mjs';
 const root = dirname(fileURLToPath(import.meta.url));
 
 // Базовый путь сайта. Для GitHub Pages вида user.github.io/taft/ — BASE_PATH=/taft/
-// Для Netlify или своего домена — «/» (по умолчанию).
+// Для адреса в корне домена — «/» (по умолчанию).
 const base = process.env.BASE_PATH || '/';
 // Полный адрес сайта после выкладки, например https://user.github.io/taft — нужен для sitemap.xml, canonical и og:url
 const SITE_URL = (process.env.SITE_URL || '').replace(/\/$/, '');

@@ -5,11 +5,10 @@
 
 ---
 
-**Сайт на GitHub Pages:** https://nastia798.github.io/taft/ (репозиторий: https://github.com/nastia798/taft)
+**Адрес сайта:** https://nastia798.github.io/taft/
+**Репозиторий:** https://github.com/nastia798/taft
 
-Выкладка работает автоматически: каждый `git push` в ветку `main` запускает workflow [deploy.yml](.github/workflows/deploy.yml), он собирает сайт с `BASE_PATH=/taft/` и `SITE_URL=https://nastia798.github.io/taft` и публикует его.
-
-**Один раз в репозитории:** *Settings → Pages → Build and deployment → Source: GitHub Actions*.
+Выкладка автоматическая: каждый `git push` в ветку `main` запускает workflow [deploy.yml](.github/workflows/deploy.yml). Он собирает сайт с `BASE_PATH=/taft/` и `SITE_URL=https://nastia798.github.io/taft` и публикует его на GitHub Pages.
 
 **Обновить сайт после правок:**
 
@@ -20,9 +19,7 @@ git commit -m "правки"
 git push
 ```
 
-Через 1–2 минуты изменения появятся на сайте (ход сборки виден во вкладке **Actions**).
-
-Другие варианты хостинга (Netlify, Beget) описаны ниже в разделе «Как выложить сайт».
+Через 1–2 минуты изменения появятся на сайте (ход сборки виден во вкладке **Actions** репозитория).
 
 ---
 
@@ -42,46 +39,27 @@ npm run dev                                  # сайт откроется на 
 
 ---
 
-## 2. Как выложить сайт и получить ссылку
+## 2. Выкладка на GitHub Pages
 
-### Вариант А. GitHub Pages (используется сейчас)
+Один раз в репозитории включи Pages: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Дальше всё делает `git push`.
 
-Адрес этого сайта: `https://nastia798.github.io/taft/`. Ниже общая инструкция на случай нового репозитория.
+Что делает workflow при каждой выкладке:
 
-1. Зарегистрируйся на [github.com](https://github.com), если аккаунта ещё нет.
-2. Нажми **+ → New repository**, назови репозиторий латиницей (например, `taft`), поставь **Public** и нажми **Create repository**. Ничего не добавляй (ни README, ни .gitignore).
-3. Открой Терминал и выполни (замени `твой-ник`):
+1. ставит зависимости (`npm ci`);
+2. собирает сайт с адресом `https://nastia798.github.io/taft` (в `sitemap.xml`, canonical и Open Graph) и префиксом `/taft/` для всех ссылок;
+3. публикует папку `dist` на GitHub Pages.
 
-   ```bash
-   export PATH="$HOME/.local/node/bin:$PATH"
-   cd ~/Desktop/курсовая/сайт
-   git init
-   git add .
-   git commit -m "Сайт Тафт"
-   git branch -M main
-   git remote add origin https://github.com/твой-ник/taft.git
-   git push -u origin main
-   ```
+Проверить такую же сборку у себя:
 
-   GitHub попросит войти. Вместо пароля нужен **Personal access token**: *Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate*, отметь `repo` и `workflow`.
-4. В репозитории открой **Settings → Pages**. В поле **Source** выбери **GitHub Actions**.
-5. Перейди на вкладку **Actions**: запустится «Деплой на GitHub Pages». Через 1–2 минуты появится зелёная галочка.
-6. Ссылка на сайт — в **Settings → Pages** (или в логе задачи `deploy`).
+```bash
+export PATH="$HOME/.local/node/bin:$PATH"
+cd ~/Desktop/курсовая/сайт
+SITE_URL=https://nastia798.github.io/taft BASE_PATH=/taft/ npm run build
+```
 
-Чтобы обновить сайт, поправь файлы и выполни `git add . && git commit -m "правки" && git push`: сайт пересоберётся сам.
+**Если поменяется адрес** (другой ник или имя репозитория), поправь две строки `BASE_PATH` и `SITE_URL` в [deploy.yml](.github/workflows/deploy.yml). Для адреса в корне домена (репозиторий `ник.github.io`) поставь `BASE_PATH: /` и `SITE_URL: https://ник.github.io`.
 
-Если репозиторий называется `твой-ник.github.io`, сайт откроется без `/taft/` — workflow это учитывает.
-
-### Вариант Б. Netlify (быстрее всего)
-
-1. Выполни сборку с адресом сайта (замени имя на любое свободное):
-
-   ```bash
-   cd ~/Desktop/курсовая/сайт
-   SITE_URL=https://taftnew.netlify.app npm run build
-   ```
-2. Открой [app.netlify.com/drop](https://app.netlify.com/drop), войди и **перетащи папку `dist`** в окно. Ссылка появится сразу.
-3. Чтобы поменять имя сайта: *Site configuration → Change site name* (оно должно совпасть с `SITE_URL`).
+Если `git push` просит логин, введи ник GitHub, а вместо пароля **Personal access token** (*Settings → Developer settings → Personal access tokens → Tokens (classic)*, права `repo` и `workflow`). Связка ключей macOS запомнит его.
 
 ---
 
