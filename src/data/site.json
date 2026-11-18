@@ -1,0 +1,78 @@
+{
+  "_comment": "Общие настройки сайта. Ники соцсетей вымышленные — аккаунтов у бренда пока нет. Поменяй здесь, и они обновятся везде.",
+  "brand": "Тафт",
+  "issue": "Выпуск #01",
+  "socials": [
+    {
+      "id": "telegram",
+      "label": "Telegram",
+      "handle": "t.me/taft_newrules",
+      "url": "https://t.me/taft_newrules"
+    },
+    {
+      "id": "tiktok",
+      "label": "TikTok",
+      "handle": "@taft.newrules",
+      "url": "https://www.tiktok.com/@taft.newrules"
+    },
+    {
+      "id": "vk",
+      "label": "VK",
+      "handle": "vk.com/taft.newrules",
+      "url": "https://vk.com/taft.newrules"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram*",
+      "handle": "@taft.newrules",
+      "url": "https://www.instagram.com/taft.newrules"
+    }
+  ],
+  "instagramNote": "*Instagram принадлежит компании Meta, деятельность которой признана экстремистской и запрещена в Российской Федерации",
+  "conceptNote": "Концепт-проект. Не является официальным сайтом бренда",
+  "shops": [
+    {
+      "id": "wildberries",
+      "label": "Wildberries",
+      "kind": "маркетплейс",
+      "url": "https://www.wildberries.ru/catalog/0/search.aspx?search={q}"
+    },
+    {
+      "id": "ozon",
+      "label": "Ozon",
+      "kind": "маркетплейс",
+      "url": "https://www.ozon.ru/search/?text={q}"
+    },
+    {
+      "id": "goldapple",
+      "label": "Золотое Яблоко",
+      "kind": "магазин и доставка",
+      "url": "https://goldapple.ru/catalogsearch/result?q={q}"
+    },
+    {
+      "id": "magnit",
+      "label": "Магнит Косметик",
+      "kind": "магазин и доставка",
+      "url": "https://cosmetic.magnit.ru/search?term={q}"
+    },
+    {
+      "id": "market",
+      "label": "Яндекс Маркет",
+      "kind": "маркетплейс",
+      "url": "https://market.yandex.ru/search?text={q}"
+    },
+    {
+      "id": "lavka",
+      "label": "Яндекс Лавка",
+      "kind": "доставка за 15 минут",
+      "url": "https://lavka.yandex.ru/search?text={q}"
+    },
+    {
+      "id": "samokat",
+      "label": "Самокат",
+      "kind": "доставка за 15 минут",
+      "url": "https://samokat.ru/search?value={q}"
+    }
+  ],
+  "_shopsComment": "Ссылки ведут на поиск товара на площадке ({q} — поисковый запрос из products.json). Точные карточки — в products.json → exactLinks. TODO: проверить формат поиска у Лавки и Самоката."
+}

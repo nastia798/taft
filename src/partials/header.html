@@ -1,0 +1,84 @@
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="bear-pink" cx="38%" cy="28%" r="80%"><stop offset="0" stop-color="#ffe0ec"/><stop offset=".45" stop-color="#f4a6c4"/><stop offset="1" stop-color="#d9628d"/></radialGradient>
+    <radialGradient id="bear-rose" cx="38%" cy="28%" r="80%"><stop offset="0" stop-color="#f7b8ce"/><stop offset=".5" stop-color="#c96a8a"/><stop offset="1" stop-color="#7d2a43"/></radialGradient>
+    <radialGradient id="bear-lime" cx="38%" cy="28%" r="80%"><stop offset="0" stop-color="#f6ffd0"/><stop offset=".5" stop-color="#d8f35a"/><stop offset="1" stop-color="#9fbf1f"/></radialGradient>
+  </defs>
+  <symbol id="o-bear" viewBox="0 0 100 120">
+    <g style="fill: var(--bear, url(#bear-pink))" opacity=".9">
+      <circle cx="27" cy="17" r="11"/><circle cx="73" cy="17" r="11"/>
+      <ellipse cx="50" cy="34" rx="27" ry="23"/>
+      <ellipse cx="50" cy="78" rx="29" ry="31"/>
+      <ellipse cx="22" cy="64" rx="9.5" ry="15" transform="rotate(28 22 64)"/><ellipse cx="78" cy="64" rx="9.5" ry="15" transform="rotate(-28 78 64)"/>
+      <ellipse cx="31" cy="104" rx="13" ry="12"/><ellipse cx="69" cy="104" rx="13" ry="12"/>
+    </g>
+    <ellipse cx="50" cy="82" rx="15" ry="18" fill="#fff" opacity=".16"/>
+    <ellipse cx="50" cy="41" rx="8" ry="5.5" fill="#fff" opacity=".22"/>
+    <circle cx="41" cy="31" r="2.4" fill="#7d2a43" opacity=".35"/><circle cx="59" cy="31" r="2.4" fill="#7d2a43" opacity=".35"/>
+    <ellipse cx="38" cy="23" rx="8" ry="4.5" fill="#fff" opacity=".75" transform="rotate(-20 38 23)"/>
+    <ellipse cx="36" cy="66" rx="4.5" ry="10" fill="#fff" opacity=".5" transform="rotate(14 36 66)"/>
+    <circle cx="24" cy="13" r="3" fill="#fff" opacity=".6"/>
+  </symbol>
+  <symbol id="o-sparkle" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12Z"/></symbol>
+</svg>
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<div class="blobs" aria-hidden="true"><span class="blob blob--1"></span><span class="blob blob--2"></span><span class="blob blob--3"></span></div>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="logo" href="/" aria-label="Тафт — на главную">Тафт<span class="logo__dot" aria-hidden="true">✦</span></a>
+
+    <nav class="main-nav" aria-label="Главное меню">
+      <ul role="list">
+        <li><a href="/catalog/" data-nav="catalog">Каталог</a></li>
+        <li><a href="/o-brende/" data-nav="o-brende">О бренде</a></li>
+        <li><a href="/novaya-upakovka/" data-nav="novaya-upakovka">Новая упаковка</a></li>
+        <li><a href="/tutorialy/" data-nav="tutorialy">Туториалы</a></li>
+        <li><a href="/gde-kupit/" data-nav="gde-kupit">Где купить</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" type="button" data-search-open aria-label="Поиск по каталогу" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>
+      </button>
+      <button class="icon-btn burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="drawer">
+        <span class="burger__lines" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-label="Меню" role="dialog" aria-modal="true" inert>
+  <nav aria-label="Мобильное меню">
+    <ul class="drawer__main" role="list">
+      <li><a href="/catalog/" data-nav="catalog">каталог <small>01</small></a></li>
+      <li><a href="/o-brende/" data-nav="o-brende">о бренде <small>02</small></a></li>
+      <li><a href="/novaya-upakovka/" data-nav="novaya-upakovka">новая упаковка <small>03</small></a></li>
+      <li><a href="/tutorialy/" data-nav="tutorialy">туториалы <small>04</small></a></li>
+      <li><a href="/gde-kupit/" data-nav="gde-kupit">где купить <small>05</small></a></li>
+    </ul>
+    <div class="drawer__extra">
+      <a class="chip" href="/faq/" data-nav="faq">Вопросы и ответы</a>
+    </div>
+  </nav>
+  <p class="drawer__note" aria-hidden="true">у нас кое-что новенькое. ты заметила?</p>
+</div>
+
+<dialog class="search-dialog" aria-labelledby="search-title">
+  <button class="icon-btn search-dialog__close" type="button" data-search-close aria-label="Закрыть поиск">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <h2 id="search-title" class="h3">что ищем?</h2>
+  <form action="/catalog/" method="get" role="search">
+    <label class="visually-hidden" for="search-q">Название средства</label>
+    <input class="input" id="search-q" name="q" type="search" placeholder="Например, текстурайзер" autocomplete="off" required />
+    <button class="btn btn--sm" type="submit">Найти</button>
+  </form>
+  <div class="search-dialog__hints">
+    <a class="chip" href="/catalog/?q=текстурайзер">текстурайзер</a>
+    <a class="chip" href="/catalog/?q=объём">объём</a>
+    <a class="chip" href="/catalog/?q=лак">лак</a>
+    <a class="chip" href="/catalog/?q=пена">пена</a>
+  </div>
+</dialog>

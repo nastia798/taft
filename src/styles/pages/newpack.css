@@ -1,0 +1,80 @@
+/* ================= Новая упаковка ================= */
+.np { position: relative; overflow-x: clip; }
+.np__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(260px, 1fr) minmax(0, 1.25fr); gap: var(--sp-7); align-items: start; }
+.np__stage { position: sticky; top: calc(var(--header-h) + 20px); display: grid; justify-items: center; }
+.np__bottle { position: relative; width: 100%; height: min(70vh, 640px); cursor: grab; }
+.np__img { position: absolute; left: 50%; bottom: 7%; height: 80%; width: auto; translate: -50% 0; filter: drop-shadow(0 30px 26px rgba(107,31,46,.3)); transform-origin: 50% 100%; transition: opacity .5s; }
+.np__bottle.is-3d .np__img { opacity: 0; pointer-events: none; }
+.np__bottle .bottle3d { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+.np__bottle .bottle-shadow { left: 32%; right: 32%; bottom: 4%; }
+.np__img.is-hop, .np__bottle:not(.is-3d):hover .np__img { animation: bottle-hop .75s var(--ease-out); }
+.np__hint { font-size: 1.35rem; color: var(--rose-text); transform: rotate(-4deg); }
+
+.np__tabs { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+.np__tab {
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: var(--tap); padding: 0 1rem 0 .5rem;
+  border-radius: var(--radius-pill); border: 1.5px solid var(--wine); background: var(--milk);
+  font-weight: 700; font-size: var(--fs-sm);
+  transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-spring);
+}
+.np__tab:active { transform: scale(.95); }
+.np__tab[aria-selected='true'] { background: var(--wine); color: var(--milk); }
+.np__tabdot { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--a) 50%, var(--b) 50%); border: 1.5px solid currentColor; }
+.np__panel { display: grid; gap: var(--sp-4); animation: np-in .5s var(--ease-out); }
+@keyframes np-in { from { opacity: 0; transform: translateY(14px); } }
+.np__name { font-size: clamp(2.4rem, 1rem + 4vw, 4.6rem); line-height: 1; }
+.np__name em { display: block; font-family: var(--font-hand); font-style: normal; font-size: .62em; color: var(--rose-text); }
+.np__design { font-size: var(--fs-md); max-width: 56ch; }
+.np__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--sp-2); margin: 0; }
+.np__facts > div { padding: .7rem .9rem; border-radius: var(--radius); background: var(--milk); border: 1px solid var(--line); }
+.np__facts dt { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+.np__facts dd { margin: .15rem 0 0; font-weight: 600; }
+.np__why { font-style: italic; color: var(--ink-soft); max-width: 56ch; }
+.np__video { width: min(100%, 300px); }
+.np__video video { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--pink-soft); }
+
+.np-row .display { font-size: clamp(2.4rem, 1rem + 5vw, 6rem); }
+.np-row__photo { margin-top: var(--sp-6); }
+.np-row__photo img { width: 100%; border-radius: var(--radius-xl); box-shadow: var(--shadow); }
+.np-row__photo figcaption { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.4rem; margin-top: var(--sp-4); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+
+/* ---------- Вендинговый автомат ---------- */
+.vend__grid { display: grid; grid-template-columns: 1fr minmax(320px, 520px); gap: var(--sp-7); align-items: center; }
+.vend .display { font-size: clamp(2.6rem, 1rem + 6vw, 7rem); }
+.vend .lead { margin-top: var(--sp-4); }
+.vend-machine { position: relative; padding: 18px; border-radius: 30px 30px 18px 18px; background: linear-gradient(160deg, #fffafc, #f1dde6); border: 2px solid var(--wine); box-shadow: inset 0 3px 0 #fff, var(--shadow-lg); }
+.vend-machine__top { display: flex; justify-content: space-between; align-items: center; padding: 0 6px 12px; }
+.vend-machine__logo { font-family: var(--font-serif); font-weight: 700; font-size: 1.5rem; }
+.vend-machine__light { width: 14px; height: 14px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); animation: blink 2s infinite; }
+@keyframes blink { 50% { opacity: .4; } }
+.vend-machine__body { display: grid; grid-template-columns: 1fr 120px; gap: 14px; }
+.vend-machine__window { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px; border-radius: 16px; background: linear-gradient(160deg, rgba(255,255,255,.9), rgba(243,201,217,.6)); border: 1.5px solid var(--wine); box-shadow: inset 0 0 20px rgba(107,31,46,.15); }
+.vend-cell { position: relative; display: grid; place-items: end center; height: 150px; padding-bottom: 22px; border-bottom: 3px solid #d7c3cc; }
+.vend-cell img { height: 110px; width: auto; filter: drop-shadow(0 8px 6px rgba(107,31,46,.25)); transition: transform .9s var(--ease-out), opacity .3s .6s; }
+.vend-cell.is-spin img { transform: translateY(60px) rotate(12deg); opacity: 0; }
+.vend-cell__coil { position: absolute; bottom: 4px; left: 12%; right: 12%; height: 12px; background: repeating-linear-gradient(90deg, #b9a7af 0 3px, transparent 3px 9px); border-radius: 6px; }
+.vend-cell.is-spin .vend-cell__coil { animation: coil .9s linear; }
+@keyframes coil { to { background-position: 36px 0; } }
+.vend-cell__n { position: absolute; bottom: -2px; left: 50%; translate: -50% 100%; font-family: var(--font-mono); font-size: 10px; background: var(--wine); color: var(--milk); padding: 1px 6px; border-radius: 4px; }
+.vend-cell__soon { font-family: var(--font-hand); font-size: 1.2rem; color: var(--ink-soft); margin-bottom: 30px; }
+.vend-machine__side { display: grid; gap: 10px; align-content: start; }
+.vend-machine__screen { min-height: 48px; padding: 8px; border-radius: 10px; background: #2b1a20; color: var(--lime); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; display: grid; place-items: center; text-align: center; }
+.vend-machine__keys { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.vend-key { min-height: var(--tap); border-radius: 12px; background: linear-gradient(180deg, #fff, #f3e3ea); border: 1.5px solid var(--wine); box-shadow: 0 4px 0 #d9aebf; font-family: var(--font-mono); font-weight: 500; transition: transform var(--dur-fast); }
+.vend-key:active { transform: translateY(3px); box-shadow: 0 1px 0 #d9aebf; }
+.vend-machine__tray { position: relative; display: flex; align-items: center; gap: 12px; min-height: 86px; margin-top: 14px; padding: 10px 16px; border-radius: 14px; background: #2b1a20; overflow: hidden; }
+.vend-machine__flap { position: absolute; inset: 0 0 auto 0; height: 10px; background: linear-gradient(#5a3a45, #2b1a20); }
+.vend-drop { height: 70px; width: auto; transform: rotate(-90deg); animation: vend-drop .6s var(--ease-spring); }
+@keyframes vend-drop { from { transform: translateY(-80px) rotate(-30deg); opacity: 0; } }
+.vend-take { margin-left: auto; }
+
+@media (max-width: 860px) {
+  .np__grid, .vend__grid { grid-template-columns: 1fr; }
+  .np__stage { position: relative; top: 0; }
+  .np__bottle { height: 52vh; }
+  .vend-machine__body { grid-template-columns: 1fr; }
+  .vend-machine__keys { grid-template-columns: repeat(5, 1fr); }
+  .vend-cell { height: 120px; }
+  .vend-cell img { height: 86px; }
+}

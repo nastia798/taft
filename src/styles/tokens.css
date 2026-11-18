@@ -1,0 +1,91 @@
+/* =========================================================
+   Дизайн-токены сайта Тафт
+   Меняй цвета/шрифты/отступы здесь — они расходятся по всему сайту.
+   ========================================================= */
+:root {
+  /* --- Палитра бренда --- */
+  --milk: #FFFAFC;          /* фон, молочный */
+  --pink: #F3C9D9;          /* розовый разворот */
+  --pink-soft: #F8E1EA;     /* светло-розовый */
+  --wine: #6B1F2E;          /* текст, логотип */
+  --wine-deep: #4A1420;     /* тёмный контрастный блок */
+  --lime: #D8F35A;          /* акцент: кнопки, стикеры, выделения — точечно */
+  --lime-soft: #E8F99A;
+  --rose: #E7A3BD;          /* роза светлая (фон, декор) */
+  --rose-deep: #C96A8A;     /* роза глубокая: крупный текст/акценты (контраст ≥3:1 только для крупного) */
+  --rose-text: #963560;     /* розовый для текста: контраст ≥4.7:1 на молочном/розовом фоне */
+  --ink-soft: #7A4250;      /* вторичный текст (контраст на молочном ≈ 7.6:1) */
+  --line: rgba(107, 31, 46, .14);
+  --white: #FFFFFF;
+
+  /* --- Цвета пяти вариантов новой упаковки (HEX из PDF упаковки) --- */
+  --v1-body: #F4A6C4; --v1-light: #FFF1F6; --v1-mid: #F0B3C8; --v1-ink: #6B1F2E;   /* 01 Glow Call */
+  --v2-body: #5E1626; --v2-light: #FFF1F5; --v2-mid: #F3C9D9; --v2-ink: #E7A3BD;   /* 02 Bordeaux */
+  --v3-body: #F2B6CC; --v3-light: #FFFFFF; --v3-mid: #E8D5EC; --v3-ink: #6B1F2E;   /* 03 Chrome Y2K */
+  --v4-body: #F7D9E5; --v4-light: #D8F35A; --v4-mid: #B8487A; --v4-ink: #6B1F2E;   /* 04 Lime Accent */
+  --v5-a: #FBCFD6; --v5-b: #F7B5CB; --v5-c: #F2BCD8; --v5-d: #EBC4E6; --v5-ink: #6B1F2E; /* 05 Gradient */
+
+  /* --- Шрифты --- */
+  --font-serif: 'Playfair Display', 'Times New Roman', serif;   /* заголовки, курсив-акценты */
+  --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; /* текст, интерфейс */
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;              /* подписи от руки, стикеры */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace; /* журнальные колонки, чек */
+
+  /* --- Типографическая шкала (fluid) --- */
+  --fs-xs: .75rem;
+  --fs-sm: .875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: clamp(1.25rem, 1.1rem + .6vw, 1.5rem);
+  --fs-xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  --fs-2xl: clamp(2.2rem, 1.4rem + 3.4vw, 4rem);
+  --fs-display: clamp(3rem, 1.6rem + 6.4vw, 7.5rem);
+  --lh-tight: 1.02;
+  --lh-snug: 1.2;
+  --lh-body: 1.6;
+
+  /* --- Отступы (шаг 4px) --- */
+  --sp-1: .25rem; --sp-2: .5rem; --sp-3: .75rem; --sp-4: 1rem; --sp-5: 1.5rem;
+  --sp-6: 2rem; --sp-7: 3rem; --sp-8: 4rem; --sp-9: 6rem; --sp-10: 8rem;
+  --gutter: clamp(1rem, .5rem + 2.5vw, 2.5rem);
+  --section-y: clamp(3.5rem, 2rem + 6vw, 8rem);
+  --container: 1280px;
+  --container-narrow: 760px;
+
+  /* --- Формы --- */
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+  --radius-pill: 999px;
+  --tap: 44px; /* минимальная зона нажатия */
+
+  /* --- Тени (мягкие, «глянцевые») --- */
+  --shadow-sm: 0 2px 6px rgba(107, 31, 46, .08);
+  --shadow: 0 10px 30px -10px rgba(107, 31, 46, .25);
+  --shadow-lg: 0 30px 60px -20px rgba(107, 31, 46, .35);
+  --shadow-polaroid: 0 1px 2px rgba(0,0,0,.08), 0 12px 24px -8px rgba(74, 20, 32, .3);
+
+  /* --- Движение --- */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --dur-fast: .18s;
+  --dur: .35s;
+  --dur-slow: .8s;
+
+  /* --- Слои --- */
+  --z-blobs: -1;
+  --z-header: 50;
+  --z-bottombar: 60;
+  --z-drawer: 70;
+  --z-modal: 90;
+  --z-paper: 100;
+  --z-preloader: 200;
+
+  --header-h: 68px;
+  --bottombar-h: 64px;
+}
+
+@media (max-width: 860px) {
+  :root { --header-h: 60px; }
+}

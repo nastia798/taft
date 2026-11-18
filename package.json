@@ -1,0 +1,28 @@
+{
+  "name": "taft-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Концепт-сайт бренда «Тафт»",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "catalog": "node scripts/generate-catalog.mjs && node scripts/generate-content.mjs"
+  },
+  "devDependencies": {
+    "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/manrope": "^5.3.0",
+    "@fontsource/playfair-display": "^5.3.0",
+    "gsap": "^3.15.1",
+    "leaflet": "^1.9.4",
+    "three": "^0.187.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

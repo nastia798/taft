@@ -1,0 +1,169 @@
+/* ================= База ================= */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--milk);
+  color: var(--wine);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1 0 auto; overflow-x: clip; } /* повёрнутые стикеры и полароиды не дают горизонтальной прокрутки */
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+img { height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
+p, li { text-wrap: pretty; }
+h1, h2, h3, h4 { text-wrap: balance; overflow-wrap: break-word; }
+
+::selection { background: var(--lime); color: var(--wine); }
+
+/* атрибут hidden всегда побеждает display из компонентов */
+[hidden] { display: none !important; }
+
+/* ---------- Типографика ---------- */
+h1, h2, h3, .h1, .h2, .h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: var(--lh-snug);
+  letter-spacing: -.01em;
+}
+.display, h1.display {
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: -.025em;
+}
+h1, .h1 { font-size: var(--fs-2xl); line-height: 1.05; }
+h2, .h2 { font-size: var(--fs-xl); }
+h3, .h3 { font-size: var(--fs-lg); }
+h1 em, h2 em, .display em { font-style: italic; color: var(--rose-text); }
+
+/* «Тафт» в заголовке — розовым «от руки», как в мудборде */
+.hand-word {
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-style: normal;
+  color: var(--rose-text);
+  font-size: 1.12em;
+  letter-spacing: 0;
+  text-transform: none;
+  display: inline-block;
+  transform: rotate(-4deg) translateY(.04em);
+  padding: 0 .06em;
+}
+.hand { font-family: var(--font-hand); font-weight: 600; font-size: 1.35em; line-height: 1.1; }
+
+/* Журнальная колонка: моно, КАПС, мелко, плотно */
+.mono-col {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.lead { font-size: var(--fs-md); max-width: 60ch; }
+.muted { color: var(--ink-soft); }
+
+/* ---------- Доступность ---------- */
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: fixed; left: 12px; top: -60px; z-index: calc(var(--z-preloader) + 1);
+  background: var(--wine); color: var(--milk); padding: 12px 18px; border-radius: var(--radius-pill);
+  text-decoration: none; font-weight: 600; transition: top var(--dur) var(--ease-out);
+}
+.skip-link:focus { top: 12px; }
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--wine);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--lime);
+  border-radius: 6px;
+}
+
+/* ---------- Бумажная текстура поверх всей страницы ---------- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-paper);
+  opacity: .32;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .12 0 0 0 0 .18 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Мягкие цветные пятна, медленно плавают ---------- */
+.blobs {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-blobs);
+  pointer-events: none;
+  overflow: hidden;
+}
+.blob {
+  position: absolute;
+  width: 46vmax;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .5;
+  will-change: transform;
+  animation: blob-float 28s ease-in-out infinite alternate;
+}
+.blob--1 { background: var(--pink); top: -16vmax; left: -12vmax; }
+.blob--2 { background: var(--v5-d); top: 30vh; right: -18vmax; animation-duration: 34s; animation-delay: -8s; opacity: .4; }
+.blob--3 { background: var(--lime-soft); bottom: -22vmax; left: 20vw; width: 32vmax; animation-duration: 40s; animation-delay: -16s; opacity: .28; }
+@keyframes blob-float {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(6vw, 4vh, 0) scale(1.08); }
+  100% { transform: translate3d(-4vw, 8vh, 0) scale(.95); }
+}
+
+/* ---------- Появление блоков при прокрутке ---------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.reveal.is-in { opacity: 1; transform: none; }
+.no-js .reveal { opacity: 1; transform: none; }
+
+/* ---------- Уменьшенное движение ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .blob { animation: none; }
+  .reveal { opacity: 1; transform: none; }
+}

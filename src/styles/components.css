@@ -1,0 +1,204 @@
+/* ================= Компоненты ================= */
+
+/* ---------- Кнопки (с «пружинкой») ---------- */
+.btn {
+  --btn-bg: var(--lime);
+  --btn-fg: var(--wine);
+  --btn-bd: var(--wine);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55em;
+  min-height: 52px;
+  padding: 0 1.6rem;
+  border: 1.5px solid var(--btn-bd);
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: var(--fs-sm);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 0 0 var(--btn-bd);
+  transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 0 var(--btn-bd); }
+.btn:active { transform: translateY(3px) scale(.98); box-shadow: 0 1px 0 0 var(--btn-bd); }
+.btn--ghost { --btn-bg: transparent; }
+.btn--ghost:hover { --btn-bg: var(--pink-soft); }
+.btn--wine { --btn-bg: var(--wine); --btn-fg: var(--milk); --btn-bd: var(--wine-deep); }
+.btn--milk { --btn-bg: var(--milk); }
+.btn--sm { min-height: var(--tap); padding: 0 1.1rem; font-size: var(--fs-xs); box-shadow: 0 3px 0 0 var(--btn-bd); }
+.btn--block { width: 100%; }
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.spread--wine .btn--ghost, .site-footer .btn--ghost { --btn-fg: var(--milk); --btn-bd: var(--milk); }
+.spread--wine .btn--ghost:hover, .site-footer .btn--ghost:hover { --btn-bg: rgba(255,250,252,.1); }
+.btn-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+
+/* ---------- Поля ввода ---------- */
+.input, .textarea, .select {
+  width: 100%;
+  min-height: 52px;
+  padding: .8rem 1.1rem;
+  border: 1.5px solid var(--wine);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--wine);
+  font-size: 16px; /* без авто-зума на iPhone */
+  transition: box-shadow var(--dur-fast);
+}
+.input { border-radius: var(--radius-pill); }
+.textarea { min-height: 120px; resize: vertical; }
+.input::placeholder, .textarea::placeholder { color: var(--ink-soft); opacity: .8; }
+.input:focus-visible, .textarea:focus-visible, .select:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--lime); }
+.field { display: grid; gap: .4rem; }
+.field label { font-weight: 600; font-size: var(--fs-sm); }
+
+/* ---------- Чипсы ---------- */
+.chip {
+  display: inline-flex; align-items: center; gap: .4em;
+  min-height: var(--tap); padding: 0 1rem;
+  border: 1.5px solid var(--wine); border-radius: var(--radius-pill);
+  background: transparent; color: var(--wine);
+  font-weight: 600; font-size: var(--fs-sm); text-decoration: none;
+  transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-spring);
+}
+.chip:hover { background: var(--pink-soft); }
+.chip:active { transform: scale(.95); }
+.chip[aria-pressed='true'], .chip.is-active, .chip[aria-current='page'] { background: var(--wine); color: var(--milk); }
+
+/* ---------- Стикеры, наклеенные под углом ---------- */
+.sticker {
+  --rot: -6deg;
+  display: inline-flex; align-items: center; gap: .3em;
+  padding: .35em .9em .4em;
+  background: var(--lime);
+  color: var(--wine);
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1;
+  border-radius: 12px;
+  transform: rotate(var(--rot));
+  box-shadow: 0 2px 0 rgba(107,31,46,.12), 0 10px 18px -10px rgba(107,31,46,.45);
+  transition: transform var(--dur) var(--ease-spring), box-shadow var(--dur);
+  white-space: nowrap;
+  position: relative;
+}
+/* «отклеивается» при наведении */
+.sticker::after {
+  content: '';
+  position: absolute; right: 0; bottom: 0;
+  width: 0; height: 0;
+  border-radius: 0 0 12px 0;
+  background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,.85) 50%, #e9e2e5 100%);
+  box-shadow: -2px -2px 4px rgba(107,31,46,.15);
+  transition: width var(--dur) var(--ease-out), height var(--dur) var(--ease-out);
+}
+.sticker:hover { transform: rotate(calc(var(--rot) * .4)) translateY(-3px) scale(1.04); box-shadow: 0 4px 0 rgba(107,31,46,.12), 0 18px 26px -12px rgba(107,31,46,.5); }
+.sticker:hover::after { width: 18px; height: 18px; }
+.sticker--pink { background: var(--rose); }
+.sticker--milk { background: var(--milk); border: 1.5px solid var(--wine); }
+.sticker--wine { background: var(--wine); color: var(--milk); }
+.sticker--strike { background: var(--milk); border: 1.5px dashed var(--wine); color: var(--ink-soft); }
+.sticker--strike > span { text-decoration: line-through; text-decoration-thickness: 3px; text-decoration-color: var(--rose-deep); }
+
+/* ---------- Полароид ---------- */
+.polaroid {
+  --rot: -3deg;
+  display: inline-block;
+  background: #fffdfb;
+  padding: 12px 12px 0;
+  border-radius: 4px;
+  box-shadow: var(--shadow-polaroid);
+  transform: rotate(var(--rot));
+  transition: transform var(--dur) var(--ease-spring);
+}
+.polaroid:hover { transform: rotate(calc(var(--rot) * .3)) translateY(-4px); }
+.polaroid__img { aspect-ratio: 1; overflow: hidden; background: var(--pink-soft); }
+.polaroid__img img { width: 100%; height: 100%; object-fit: cover; }
+/* тёплое плёночное зерно */
+.polaroid--film .polaroid__img { position: relative; }
+.polaroid--film .polaroid__img img { filter: sepia(.35) saturate(1.15) contrast(.95) brightness(1.03); }
+.polaroid--film .polaroid__img::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 55%, rgba(74,20,32,.28) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .35 0 0 0 0 .2 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+.polaroid__cap {
+  display: block;
+  padding: .55rem .2rem .8rem;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: var(--wine);
+}
+
+/* ---------- Заглушка для фото людей ---------- */
+.ph {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: var(--ph-ratio, 4 / 5);
+  border-radius: var(--radius);
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 14px, rgba(107,31,46,.05) 14px 15px),
+    var(--pink-soft);
+  border: 1.5px dashed var(--rose-deep);
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 1rem;
+  overflow: hidden;
+}
+.ph__label { font-family: var(--font-hand); font-size: 1.5rem; line-height: 1.1; }
+.ph__tag {
+  position: absolute; top: 10px; left: 10px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  background: var(--milk); padding: 3px 7px; border-radius: 6px; border: 1px solid var(--line);
+}
+
+/* ---------- Карточки ---------- */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.card-link { text-decoration: none; display: block; }
+
+/* ---------- Сетки ---------- */
+.grid { display: grid; gap: var(--gap, var(--sp-5)); }
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid--auto { grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--min, 240px)), 1fr)); }
+@media (max-width: 960px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid--2, .grid--3 { grid-template-columns: 1fr; } }
+
+/* ---------- Плашка «раздел в работе» (только на время сборки каркаса) ---------- */
+.wip {
+  display: flex; gap: var(--sp-4); align-items: center;
+  padding: var(--sp-5) var(--sp-6);
+  border: 1.5px dashed var(--wine);
+  border-radius: var(--radius-lg);
+  background: var(--milk);
+}
+.wip .sticker { flex-shrink: 0; }
+
+/* ---------- Цвет-код вариантов упаковки ---------- */
+.swatch { display: inline-block; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--wine); vertical-align: middle; }
+.variant-chip { --c: var(--pink); background: var(--c); }
+.variant-chip.v1 { --c: var(--v1-body); }
+.variant-chip.v2 { --c: var(--v2-body); color: var(--v2-light); }
+.variant-chip.v3 { --c: linear-gradient(135deg, var(--v3-light), var(--v3-body) 45%, var(--v3-mid)); }
+.variant-chip.v4 { --c: var(--v4-body); }
+.variant-chip.v5 { --c: linear-gradient(135deg, var(--v5-a), var(--v5-b), var(--v5-c), var(--v5-d)); }

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    <!-- @include head -->
+    <title>Где купить Тафт в Москве — магазины на карте и доставка</title>
+    <meta name="description" content="Магазины в Москве, где есть средства Тафт: карта с фильтром по сетям «Золотое Яблоко», «Улыбка радуги», «Магнит Косметик» и «ВкусВилл», маркетплейсы и доставка за 15 минут." />
+    <script type="module" src="/src/js/pages/where.js"></script>
+  </head>
+  <body data-page="gde-kupit">
+    <!-- @include header -->
+
+    <main id="main">
+      <section class="spread spread--milk page-head">
+        <!-- @include decor -->
+        <div class="container">
+        <nav class="crumbs" aria-label="Хлебные крошки">
+          <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1" /></li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name" aria-current="page">Где купить</span><meta itemprop="position" content="2" /></li>
+          </ol>
+        </nav>
+        <h1 class="display page-title">где купить <span class="hand-word">Тафт</span></h1>
+        <p class="lead">Магазины рядом, маркетплейсы и доставка за 15 минут — когда средство закончилось прямо перед выходом.</p>
+        </div>
+      </section>
+
+      <!-- ============ Карта ============ -->
+      <section class="spread spread--soft where" aria-labelledby="map-title">
+        <div class="container">
+          <h2 id="map-title" class="where__title">магазины <em>в Москве</em></h2>
+          <div class="where__bar">
+            <div class="seg" role="group" aria-label="Сети магазинов" data-chain-filter></div>
+            <button class="btn btn--ghost btn--sm" type="button" data-near>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+              Рядом со мной
+            </button>
+          </div>
+          <div class="where__grid">
+            <div class="where__map" data-map role="region" aria-label="Карта магазинов"></div>
+            <div class="where__list-wrap">
+              <p class="where__count" data-store-count role="status" aria-live="polite"></p>
+              <ul class="where__list" role="list" data-store-list></ul>
+            </div>
+          </div>
+          <p class="where__note">Ассортимент в конкретном магазине может отличаться — перед поездкой проверь наличие в приложении сети.</p>
+        </div>
+      </section>
+
+      <!-- ============ Доставка и маркетплейсы ============ -->
+      <section class="spread spread--pink delivery" aria-labelledby="delivery-title">
+        <div class="container delivery__grid">
+          <div>
+            <h2 id="delivery-title" class="display">за <em>15 минут</em></h2>
+            <p class="lead">Закончился текстурайзер, а выходить через полчаса? Закажи в сервисе быстрой доставки.</p>
+            <div class="btn-row delivery__btns" data-delivery></div>
+          </div>
+          <div class="delivery__mp">
+            <h3 class="h3">или на маркетплейсе</h3>
+            <ul class="mp-list" role="list" data-marketplaces></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- @include footer -->
+  </body>
+</html>
