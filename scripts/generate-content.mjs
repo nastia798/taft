@@ -180,7 +180,7 @@ function faqPage(faq) {
 function newPackPage(products) {
   const items = products.filter((p) => p.variant).sort((a, b) => a.variant.num.localeCompare(b.variant.num));
   const url = (p) => `/catalog/${p.section}/${p.slug}/`;
-  const buy = (p) => `data-buy data-buy-name="${esc(p.name)}" data-buy-q="${esc(p.search)}"`;
+  const buy = (p) => `data-buy data-buy-id="${esc(p.id)}" data-buy-name="${esc(p.name)}" data-buy-q="${esc(p.search)}"`;
   const first = items[0];
   const main = `      <section class="spread spread--milk page-head">
         <!-- @include decor -->

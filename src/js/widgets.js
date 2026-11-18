@@ -1,6 +1,7 @@
 // Общие виджеты: «Спроси стилиста», pop-up с пробником, счётчик находок (пасхалки).
 import faq from '../data/faq.json';
 import { load, save } from './storage.js';
+import { goal } from './analytics.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -42,6 +43,7 @@ function initStylist() {
     box.hidden = !state;
     fab.setAttribute('aria-expanded', String(state));
     document.body.classList.toggle('stylist-open', state);
+    if (state) goal('stylist_open');
     if (state && !started) {
       started = true;
       bubble('bot', 'Привет! Я стилист Тафт. Выбери вопрос — отвечу сразу. Или задай свой.');
@@ -100,6 +102,7 @@ function initLeadPop() {
     if (!form.email.checkValidity()) { msg.textContent = 'Проверь почту — кажется, опечатка.'; form.email.focus(); return; }
     if (!form.ok.checked) { msg.textContent = 'Поставь галочку согласия — без неё не сможем написать.'; return; }
     msg.textContent = 'Готово! Письмо с адресом, где забрать пробник, уже летит ✦';
+    goal('sample_popup');
     form.querySelector('button[type=submit]').disabled = true;
     setTimeout(() => dlg.close(), 2600);
   });
@@ -164,6 +167,18 @@ function initFinds() {
   });
 }
 
+/* ================= Уведомление о cookie ================= */
+function initCookie() {
+  const box = document.querySelector('[data-cookie]');
+  if (!box || load('cookie-ok', false)) return;
+  box.hidden = false;
+  box.querySelector('[data-cookie-ok]').addEventListener('click', () => {
+    save('cookie-ok', true);
+    box.hidden = true;
+  });
+}
+
+initCookie();
 initStylist();
 initLeadPop();
 initFinds();

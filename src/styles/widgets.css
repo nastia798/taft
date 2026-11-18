@@ -107,3 +107,22 @@
   .leadpop__body { padding: 1.2rem 1.2rem calc(1.2rem + env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) { .bear.is-jelly { animation: none; } }
+
+/* ---------- Уведомление о cookie ---------- */
+.cookie {
+  position: fixed; z-index: 80;
+  left: 50%; translate: -50% 0;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  width: min(720px, calc(100% - 24px));
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: .8rem 1rem;
+  border-radius: var(--radius-lg);
+  background: var(--milk); border: 1.5px solid var(--wine);
+  box-shadow: 0 4px 0 var(--wine-deep), var(--shadow);
+  font-size: var(--fs-sm);
+}
+.cookie[hidden] { display: none; }
+.cookie__text { margin: 0; flex: 1; }
+.cookie__text a { color: var(--rose-text); text-decoration: underline; text-underline-offset: 3px; }
+.cookie .btn { flex: none; }
+@media (max-width: 520px) { .cookie { padding: .7rem .8rem; gap: .6rem; font-size: 13px; } }

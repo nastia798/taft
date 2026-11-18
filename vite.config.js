@@ -50,7 +50,7 @@ const SOCIAL_ICONS = {
 /** Кнопки соцсетей из src/data/site.json — статичный HTML (виден поисковикам и без JS). */
 function renderSocials(site) {
   const items = site.socials.map((s) => `
-    <li><a class="social" href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}: ${s.handle} (откроется в новой вкладке)">
+    <li><a class="social" data-social="${s.id}" href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}: ${s.handle} (откроется в новой вкладке)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SOCIAL_ICONS[s.id] || ''}</svg>${s.label}</a></li>`).join('');
   return `<ul class="socials" role="list">${items}</ul>`;
 }

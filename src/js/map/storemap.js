@@ -50,7 +50,7 @@ export function createStoreMap(el, { compact = false, onSelect } = {}) {
   for (const s of stores) {
     const c = chains[s.chain];
     const m = L.marker([s.lat, s.lon], { icon: pin(c), title: `${c.name}, ${s.address}`, keyboard: true, riseOnHover: true })
-      .bindPopup(`<strong>${c.name}</strong><br>${s.address.replace('Москва, ', '')}<br><small>${hoursText(s)}</small><br><a href="${routeUrl(s)}" target="_blank" rel="noopener">Маршрут →</a>`)
+      .bindPopup(`<strong>${c.name}</strong><br>${s.address.replace('Москва, ', '')}<br><small>${hoursText(s)}</small><br><a data-route="${s.chain}" href="${routeUrl(s)}" target="_blank" rel="noopener">Маршрут →</a>`)
       .addTo(map);
     m.on('click', () => onSelect?.(s.id));
     markers[s.id] = m;

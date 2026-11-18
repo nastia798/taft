@@ -29,7 +29,7 @@ ${all.map(([n, h], i) => `            <li itemprop="itemListElement" itemscope i
         </nav>`;
 }
 
-function page({ title, description, bodyPage, script, main, extraHead = '' }) {
+function page({ title, description, bodyPage, script, main, extraHead = '', bodyAttrs = '' }) {
   return `<!doctype html>
 <!-- Сгенерировано scripts/generate-catalog.mjs из src/data/products.json — не править вручную -->
 <html lang="ru" class="no-js">
@@ -39,7 +39,7 @@ function page({ title, description, bodyPage, script, main, extraHead = '' }) {
     <meta name="description" content="${esc(description)}" />
     <script type="module" src="${script}"></script>${extraHead}
   </head>
-  <body data-page="${bodyPage}">
+  <body data-page="${bodyPage}"${bodyAttrs}>
     <!-- @include header -->
 
     <main id="main">
@@ -66,7 +66,7 @@ function fixScale(f) {
 }
 
 function buyAttrs(p) {
-  return `data-buy data-buy-name="${esc(p.name)}" data-buy-q="${esc(p.search)}"${p.exactLinks ? ` data-buy-exact="${esc(JSON.stringify(p.exactLinks))}"` : ''}`;
+  return `data-buy data-buy-id="${esc(p.id)}" data-buy-name="${esc(p.name)}" data-buy-q="${esc(p.search)}"${p.exactLinks ? ` data-buy-exact="${esc(JSON.stringify(p.exactLinks))}"` : ''}`;
 }
 
 function priceHtml(p) {
@@ -346,6 +346,7 @@ function productPage(data, p) {
     title,
     description,
     bodyPage: 'product',
+    bodyAttrs: ` data-product-id="${esc(p.id)}" data-product-name="${esc(p.name)}"${p.variant ? ' data-new-pack' : ''}`,
     script: '/src/js/pages/product.js',
     main,
     extraHead: `\n    <link rel="preload" as="image" imagesrcset="${gallery[0].set}" imagesizes="(max-width: 860px) 90vw, 520px" fetchpriority="high" />\n    <script type="application/ld+json">${JSON.stringify(ld)}</script>`,

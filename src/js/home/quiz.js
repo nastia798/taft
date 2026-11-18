@@ -2,6 +2,7 @@
 // Ответы — кнопки калькулятора, на экране — вопрос и в конце результат; ниже — подборка из каталога.
 import data from '../../data/products.json';
 import { load, save } from '../storage.js';
+import { goal } from '../analytics.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -81,7 +82,7 @@ function cardHTML(p) {
       </a>
       ${twinChip(p)}
       <div class="pcard__foot">${priceText(p)}
-        <a class="btn btn--sm" href="${BASE}/gde-kupit/" data-buy data-buy-name="${esc(p.name)}" data-buy-q="${esc(p.search)}"${p.exactLinks ? ` data-buy-exact="${esc(JSON.stringify(p.exactLinks))}"` : ''}>Где купить</a>
+        <a class="btn btn--sm" href="${BASE}/gde-kupit/" data-buy data-buy-id="${esc(p.id)}" data-buy-name="${esc(p.name)}" data-buy-q="${esc(p.search)}"${p.exactLinks ? ` data-buy-exact="${esc(JSON.stringify(p.exactLinks))}"` : ''}>Где купить</a>
       </div>
     </article>
   </li>`;
@@ -101,6 +102,7 @@ export function initQuiz() {
 
   let i = 0;
   let ans = {};
+  let started = false;
 
   const render = () => {
     const q = QUESTIONS[i];
@@ -120,6 +122,7 @@ export function initQuiz() {
     cards.innerHTML = pick(ans).map(cardHTML).join('');
     result.hidden = false;
     save('quiz', ans);
+    if (scroll) goal('quiz_complete');
     document.dispatchEvent(new CustomEvent('taft:quiz-done'));
     if (scroll) result.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
   };
@@ -128,7 +131,8 @@ export function initQuiz() {
     const b = e.target.closest('button');
     if (!b) return;
     b.classList.add('is-hit');
-    if (b.hasAttribute('data-again')) { i = 0; ans = {}; result.hidden = true; render(); keys.querySelector('button')?.focus(); return; }
+    if (b.hasAttribute('data-again')) { i = 0; ans = {}; started = false; result.hidden = true; render(); keys.querySelector('button')?.focus(); return; }
+    if (i === 0 && !started) { started = true; goal('quiz_start'); }
     ans[QUESTIONS[i].id] = b.dataset.v;
     setTimeout(() => {
       if (i < QUESTIONS.length - 1) { i++; render(); keys.querySelector('button')?.focus(); }
@@ -139,7 +143,7 @@ export function initQuiz() {
     if (!result.hidden) { result.hidden = true; i = QUESTIONS.length - 1; render(); return; }
     if (i > 0) { i--; render(); }
   });
-  reset.addEventListener('click', () => { i = 0; ans = {}; result.hidden = true; render(); });
+  reset.addEventListener('click', () => { i = 0; ans = {}; started = false; result.hidden = true; render(); });
 
   // если квиз уже проходили на этом устройстве — показываем прошлый результат
   const prev = load('quiz', null);

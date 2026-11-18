@@ -2,6 +2,7 @@
 // Атрибуты кнопки: data-buy, data-buy-name, data-buy-q (поисковый запрос), data-buy-exact (JSON точных ссылок).
 // Без JS кнопка — обычная ссылка на страницу «Где купить».
 import site from '../data/site.json';
+import { goal, withUtm } from './analytics.js';
 
 const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
 
@@ -17,10 +18,13 @@ export function initBuy(root = document) {
     const q = btn.dataset.buyQ || 'тафт';
     let exact = {};
     try { exact = btn.dataset.buyExact ? JSON.parse(btn.dataset.buyExact) : {}; } catch { exact = {}; }
-    title.textContent = btn.dataset.buyName || 'Выбери магазин';
+    const name = btn.dataset.buyName || 'Выбери магазин';
+    const code = btn.dataset.buyId || 'all';
+    title.textContent = name;
+    goal('where_to_buy', { product: name });
     list.innerHTML = site.shops.map((s) => {
-      const href = exact[s.id] || s.url.replace('{q}', encodeURIComponent(q));
-      return `<li><a class="buy-item buy-item--${s.id}" href="${href}" target="_blank" rel="noopener">
+      const href = withUtm(exact[s.id] || s.url.replace('{q}', encodeURIComponent(q)), code);
+      return `<li><a class="buy-item buy-item--${s.id}" data-shop="${s.id}" data-product="${name.replace(/"/g, '&quot;')}" href="${href}" target="_blank" rel="noopener">
         <span class="buy-item__name">${s.label}</span><span class="buy-item__kind">${exact[s.id] ? 'карточка товара' : s.kind}</span>${ICON}
         <span class="visually-hidden">(откроется в новой вкладке)</span></a></li>`;
     }).join('');

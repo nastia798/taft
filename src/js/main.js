@@ -2,6 +2,7 @@
 // подписка. Тяжёлые анимации (GSAP: параллакс, флакон) подгружаются отдельно.
 import '../styles/main.css';
 import { splitHeadings } from './split.js';
+import { goal, initTracking } from './analytics.js';
 
 export const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -72,6 +73,7 @@ function initSubscribe() {
         return;
       }
       msg.textContent = 'Готово! Первое письмо уже собирается ✦';
+      goal('subscribe');
       form.reset();
     });
   });
@@ -83,6 +85,7 @@ function init() {
   if (!reducedMotion()) splitHeadings();
   initReveal();
   initSubscribe();
+  initTracking();
 
   // Мыльные пузыри работают и при reduced motion (просто не плавают)
   if (document.querySelector('[data-bubbles]')) {

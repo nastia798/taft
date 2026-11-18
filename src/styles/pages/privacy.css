@@ -1,0 +1,6 @@
+/* ================= Политика конфиденциальности ================= */
+.privacy { max-width: 74ch; display: grid; gap: var(--sp-3); }
+.privacy h2 { margin-top: var(--sp-5); }
+.privacy ul { padding-left: 1.2rem; display: grid; gap: var(--sp-2); }
+.privacy a { color: var(--rose-text); text-decoration: underline; text-underline-offset: 3px; }
+.page-head h1.page-title.page-title--long { font-size: clamp(1.8rem, 8vw, 5.4rem); max-width: 18ch; }

@@ -85,7 +85,17 @@ SITE_URL=https://nastia798.github.io/taft BASE_PATH=/taft/ npm run build
 - **Видео туториалов**: положи ролики в `public/video/tutorials/` и впиши путь в `tutorials.json → video`.
 - **Фото** для блоков «до / после» и «укладка от вас» (сейчас заглушки «пример блока»).
 - **Ники соцсетей** вымышленные: поменяй в `site.json → socials`.
+- **Политика конфиденциальности:** название оператора и контактная почта (`TODO` в `politika-konfidencialnosti/index.html`).
 - «Совет мастера» в туториалах: нет шагов.
+
+---
+
+## 3а. Аналитика (Яндекс Метрика 114348242)
+
+- Код счётчика: [head.html](src/partials/head.html). Он подгружается после загрузки страницы и на localhost не включается. Включены Вебвизор, карта кликов, точный отказ и отслеживание ссылок.
+- Цели и UTM-метки: [analytics.js](src/js/analytics.js). Цели заводятся в Метрике: *Цели → Добавить цель → JavaScript-событие*, идентификатор — как в таблице в ответе (`where_to_buy`, `marketplace_click` и т. д.).
+- Ссылки на магазины получают `utm_source=taft_site&utm_medium=referral&utm_campaign=new_pack&utm_content=<код товара>`.
+- Уведомление о cookie: [widgets.html](src/partials/widgets.html). Страница [политики конфиденциальности](politika-konfidencialnosti/index.html): впиши оператора и почту вместо `TODO`.
 
 ---
 

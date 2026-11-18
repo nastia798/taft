@@ -2,6 +2,7 @@
 import '../../styles/pages/catalog.css';
 import '../../styles/pages/where.css';
 import site from '../../data/site.json';
+import { withUtm } from '../analytics.js';
 import { createStoreMap, chains, stores, hoursText, routeUrl } from '../map/storemap.js';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -39,7 +40,7 @@ function initWhere() {
           <span class="store__addr">${esc(s.address.replace('Москва, ', ''))}</span>
           <span class="store__meta">${esc(s.district)}${s.d != null ? ` · ${s.d.toFixed(1).replace('.', ',')} км` : ''} · ${esc(hoursText(s))}</span>
         </button>
-        <a class="store__route" href="${routeUrl(s)}" target="_blank" rel="noopener" aria-label="Маршрут до магазина ${esc(c.name)}, ${esc(s.address)} (откроется в новой вкладке)">Маршрут</a>
+        <a class="store__route" data-route="${s.chain}" href="${routeUrl(s)}" target="_blank" rel="noopener" aria-label="Маршрут до магазина ${esc(c.name)}, ${esc(s.address)} (откроется в новой вкладке)">Маршрут</a>
       </article></li>`;
     }).join('');
     map.filter(on);
@@ -93,12 +94,12 @@ function initDelivery() {
   const del = document.querySelector('[data-delivery]');
   if (del) {
     del.innerHTML = [['lavka', 'Заказать в Лавке за 15 минут', ''], ['samokat', 'Заказать в Самокате за 15 минут', 'btn--milk']].map(([id, label, cls]) =>
-      `<a class="btn ${cls}" href="${shop(id).url.replace('{q}', q)}" target="_blank" rel="noopener">${label}<span class="visually-hidden"> (откроется в новой вкладке)</span></a>`).join('');
+      `<a class="btn ${cls}" data-shop="${id}" href="${withUtm(shop(id).url.replace('{q}', q))}" target="_blank" rel="noopener">${label}<span class="visually-hidden"> (откроется в новой вкладке)</span></a>`).join('');
   }
   const mp = document.querySelector('[data-marketplaces]');
   if (mp) {
     mp.innerHTML = ['wildberries', 'ozon', 'market', 'goldapple', 'magnit'].map((id) => shop(id)).map((s) =>
-      `<li><a class="buy-item" href="${s.url.replace('{q}', q)}" target="_blank" rel="noopener"><span class="buy-item__name">${esc(s.label)}</span><span class="buy-item__kind">${esc(s.kind)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg><span class="visually-hidden">(откроется в новой вкладке)</span></a></li>`).join('');
+      `<li><a class="buy-item" data-shop="${s.id}" href="${withUtm(s.url.replace('{q}', q))}" target="_blank" rel="noopener"><span class="buy-item__name">${esc(s.label)}</span><span class="buy-item__kind">${esc(s.kind)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg><span class="visually-hidden">(откроется в новой вкладке)</span></a></li>`).join('');
   }
 }
 

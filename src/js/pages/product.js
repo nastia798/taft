@@ -3,6 +3,7 @@ import '../../styles/pages/catalog.css';
 import '../../styles/pages/product.css';
 import { initBuy } from '../buy.js';
 import { load, save } from '../storage.js';
+import { goal } from '../analytics.js';
 
 const BASE = import.meta.env.BASE_URL; // '/' или '/имя-репозитория/' на GitHub Pages
 const withBase = (u) => (u && u.startsWith('/') ? BASE.replace(/\/$/, '') + u : u);
@@ -117,6 +118,7 @@ function initReview() {
     if (text.length < 10) { msg.textContent = 'Напиши хотя бы пару слов о средстве.'; form.text.focus(); return; }
     save(`review:${id}`, { name, text, rating, date: new Date().toISOString().slice(0, 10) });
     msg.textContent = 'Спасибо! Отзыв отправлен на проверку ✦';
+    goal('review_submit', { product: document.body.dataset.productName || id });
     form.reset();
     render();
   });
@@ -142,6 +144,7 @@ async function init3D() {
   if (!document.querySelector('[data-thumb][aria-current="true"]') || document.querySelector('[data-thumb="0"][aria-current="true"]')) stage.classList.add('is-3d');
 }
 
+if (document.body.hasAttribute('data-new-pack')) goal('new_pack_view', { product: document.body.dataset.productName });
 initGallery();
 initReview();
 const run3D = () => init3D().catch(() => {});
